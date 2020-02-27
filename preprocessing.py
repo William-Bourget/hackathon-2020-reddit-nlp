@@ -1,8 +1,19 @@
+import unicodedata
 import gensim
-from gensim.utils import deaccent
 import re
+import spacy
 
-def normalize(nlp, doc, remove_stops=True, min_word_length=3, max_word_length=15, ngrams=False):
+nlp = spacy.load('en_core_web_md-2.2.5/')
+
+
+def deaccent(text):
+    if not isinstance(text, str):
+        text = text.decode('utf8')
+    norm = unicodedata.normalize("NFD", text)
+    result = ''.join(ch for ch in norm if unicodedata.category(ch) != 'Mn')
+    return unicodedata.normalize("NFC", result)
+
+def normalize(doc, remove_stops=True, min_word_length=3, max_word_length=15, ngrams=False,model=nlp):
     """ Note: removing stop words isn't always a good idea. This might be appropriate for
     some types of document classification but for sentiment analysis removing stop words
     can change the meaning of a sentence and affect sentiment.

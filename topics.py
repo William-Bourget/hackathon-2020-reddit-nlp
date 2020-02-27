@@ -1,4 +1,3 @@
-import numpy as np
 import gensim.corpora as corpora
 from gensim.models import CoherenceModel
 from gensim.models import ldamulticore
