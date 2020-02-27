@@ -4,4 +4,6 @@ data
 *.pyc
 *.joblib
 venv
-.ipynb_checkpoints
+en_core_web_md-2.2.5/*
+
+data/*
